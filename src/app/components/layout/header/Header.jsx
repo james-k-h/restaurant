@@ -4,9 +4,13 @@ import Link from 'next/link';
 
 const Header = () => {
   const session = useSession();
-  const status = session.status;
+  const status = session?.status;
   const userData = session.data?.user;
-  const userName = userData?.name || userData?.email;
+  let userName = userData?.name || userData?.email;
+
+  if (userName && userName.includes(' ')) {
+    userName = userName.split(' ')[0];
+  }
 
   return (
     <>
