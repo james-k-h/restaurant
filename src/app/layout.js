@@ -3,6 +3,7 @@ import './globals.css';
 import siteMetadata from '../utils/metaData';
 import Header from './components/layout/header/Header';
 import Footer from './components/layout/footer/Footer';
+import { AppProvider } from './components/AppContext';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -21,9 +22,11 @@ export default function RootLayout({ children }) {
     <html lang="en">
       <body className={roboto.className}>
         <main className="max-w-4xl mx-auto border p-4 bg-tan">
-          <Header />
-          {children}
-          <Footer />
+          <AppProvider>
+            <Header />
+            {children}
+            <Footer />
+          </AppProvider>
         </main>
       </body>
     </html>
