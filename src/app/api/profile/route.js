@@ -10,7 +10,7 @@ export async function PUT(req) {
   const email = session.user.email;
 
   if ('name' in data) {
-    await User.findOne({ email }, { name: data.name });
+    const result = await User.findOne({ email }, { name: data.name });
   }
 
   return Response.json(true);
