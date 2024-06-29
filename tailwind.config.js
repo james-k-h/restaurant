@@ -29,7 +29,7 @@ module.exports = {
         almond: '#EFDECD',
         // lightBlack: '#343432',
         lightBlack: '#474744',
-        lightPink: '#e9fffc',
+        lightPink: '#FFB6C1',
         lightTan: '##FCF4D0',
       },
     },
