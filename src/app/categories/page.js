@@ -52,6 +52,25 @@ const CategoriesPage = () => {
     });
   }
 
+  async function handleDeleteClick(_id) {
+    const promise = new Promise(async (resolve, reject) => {
+      const response = await fetch('/api/categories?_id=' + _id, {
+        method: 'DELETE',
+      });
+      if (response.ok) {
+        resolve();
+      } else {
+        reject();
+      }
+    });
+
+    await toast.promise(promise, {
+      loading: 'Deleting...',
+      success: 'Deleted',
+      error: 'Error',
+    });
+    fetchCategories();
+  }
   if (profileLoading) {
     return 'Loading...';
   }
@@ -81,27 +100,50 @@ const CategoriesPage = () => {
               onChange={(ev) => setCategoryName(ev.target.value)}
             />
           </div>
-          <div className="pb-2">
+          <div className="pb-2 flex gap-2">
             <button type="submit">
               {editedCategory ? 'Update' : 'Create'}
+            </button>
+            <button
+              type="button"
+              onClick={() => {
+                setEditedCategory(null);
+                setCategoryName('');
+              }}
+            >
+              Cancel
             </button>
           </div>
         </div>
       </form>
       <div>
-        <h2 className="mt-8 text-lightBlack font-semibold">Edit Category:</h2>
+        <h2 className="mt-8 text-lightBlack font-semibold">
+          Existing Categories:
+        </h2>
         {categories?.length > 0 &&
           categories.map((c) => (
-            <button
-              onClick={() => {
-                setEditedCategory(c);
-                setCategoryName(c.name);
-              }}
+            <div
               key={c.name}
-              className="bg-lightBlack text-white rounded-xl p-2 px-4 gap-1 cursor-pointer mb-2"
+              className="bg-lightBlack text-white flex rounded-xl 
+              items-center
+              p-2 px-4 gap-1 mb-2"
             >
-              <span>{c.name}</span>
-            </button>
+              <div className="grow ">{c.name}</div>
+              <div className="flex gap-1">
+                <button
+                  onClick={() => {
+                    setEditedCategory(c);
+                    setCategoryName(c.name);
+                  }}
+                  type="button"
+                >
+                  Edit
+                </button>
+                <button onClick={() => handleDeleteClick(c._id)} type="button">
+                  Delete
+                </button>
+              </div>
+            </div>
           ))}
       </div>
     </section>
