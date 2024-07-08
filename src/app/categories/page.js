@@ -98,7 +98,7 @@ const CategoriesPage = () => {
                 setCategoryName(c.name);
               }}
               key={c.name}
-              className="bg-primary rounded-xl p-2 px-4 gap-1 cursor-pointer mb-2"
+              className="bg-lightBlack text-white rounded-xl p-2 px-4 gap-1 cursor-pointer mb-2"
             >
               <span>{c.name}</span>
             </button>

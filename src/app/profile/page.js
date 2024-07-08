@@ -8,6 +8,7 @@ import toast from 'react-hot-toast';
 import Error from 'next/error';
 import Link from 'next/link';
 import Tabs from '../components/layout/header/Tabs';
+import EditableImage from '../components/layout/EditableImage';
 
 const ProfilePage = () => {
   const session = useSession();
@@ -79,32 +80,6 @@ const ProfilePage = () => {
     return redirect('/login');
   }
 
-  async function handleFileChange(ev) {
-    const files = ev.target.files;
-    if (files?.length === 1) {
-      const data = new FormData();
-      data.set('file', files[0]);
-
-      const uploadPromise = fetch('/api/upload', {
-        method: 'POST',
-        body: data,
-      }).then((response) => {
-        if (response.ok) {
-          return response.json().then((link) => {
-            setImage(link);
-          });
-        }
-        throw new Error('Error, please try again later');
-      });
-
-      await toast.promise(uploadPromise, {
-        loading: 'Uploading...',
-        success: 'Upload Finished',
-        error: 'Issue with Uploading',
-      });
-    }
-  }
-
   return (
     <section className="mt-8">
       <Tabs isAdmin={isAdmin} />
@@ -113,26 +88,7 @@ const ProfilePage = () => {
         <div className="flex gap-4  p-2 ">
           <div>
             <div className="bg-lightBlack rounded-lg p-2 relative max-w-[400px]">
-              {image && (
-                <Image
-                  className="w-full h-full rounded-lg mb-4"
-                  src={image}
-                  width={250}
-                  height={500}
-                  alt="avatar"
-                />
-              )}
-
-              <label>
-                <input
-                  type="file"
-                  className="hidden"
-                  onChange={handleFileChange}
-                />
-                <span className="block border rounded-lg p-2 cursor-pointer text-center">
-                  Edit
-                </span>
-              </label>
+              <EditableImage link={image} setLink={setImage} />
             </div>
           </div>
           <form className="grow" onSubmit={handleChange}>

@@ -22,8 +22,9 @@ input[type='text']:disabled {
   @apply bg-almond cursor-not-allowed;
 }
 
-button {
-  @apply block w-full text-gray font-semibold;
+button,
+.button {
+  @apply flex justify-center gap-2 block w-full text-gray font-semibold;
   @apply border border-lightBlack rounded-xl px-6 py-2;
 }
 button[type='submit'],
