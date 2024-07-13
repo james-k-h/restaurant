@@ -62,10 +62,10 @@ const ProfilePage = () => {
   }
 
   return (
-    <section className="mt-8 ">
+    <section className="mt-8 h-screen">
       <Tabs isAdmin={isAdmin} />
 
-      <div className="max-w-4xl  mx-auto border mt-4">
+      <div className="max-w-4xl  mx-auto border mt-4 ">
         <UserForm user={user} onSave={handleChange} />
       </div>
     </section>

@@ -1,15 +1,20 @@
 'use client';
 import { useState } from 'react';
 import EditableImage from '../EditableImage';
+import { useProfile } from '@/app/hooks/GetProfile';
 
 const UserForm = ({ user, onSave }) => {
-  const [userName, setUserName] = useState(user?.userName || '');
+  const [userName, setUserName] = useState(user?.name || '');
   const [image, setImage] = useState(user?.image || '');
   const [phone, setPhone] = useState(user?.phone || '');
   const [streetAddress, setStreetAddress] = useState(user?.streetAddress || '');
   const [postalCode, setPostalCode] = useState(user?.postalCode || '');
   const [city, setCity] = useState(user?.city || '');
   const [country, setCountry] = useState(user?.country || '');
+
+  const [admin, setAdmin] = useState(user?.admin || false);
+
+  const { data: loggedInUserData } = useProfile();
 
   return (
     <div className="flex gap-4  p-2 ">
@@ -29,17 +34,17 @@ const UserForm = ({ user, onSave }) => {
             city,
             country,
             postalCode,
+            admin,
           })
         }
       >
         <label>Given and Surname</label>
         <input
           type="text"
-          placeholder="First and Last name"
-          className="text-lightBlack"
+          placeholder="First and last name"
           value={userName}
           onChange={(ev) => setUserName(ev.target.value)}
-        ></input>
+        />
         <label>Email</label>
         <input type="email" value={user.email} disabled={true}></input>
         <label>Phone Number</label>
@@ -56,7 +61,7 @@ const UserForm = ({ user, onSave }) => {
           value={country}
           onChange={(ev) => setCountry(ev.target.value)}
         />
-        <div className="flex gap-2">
+        <div className="flex gap-2 grid grid-cols-2">
           <div>
             <label>Postal Code</label>
             <input
@@ -83,6 +88,24 @@ const UserForm = ({ user, onSave }) => {
           value={streetAddress}
           onChange={(ev) => setStreetAddress(ev.target.value)}
         />
+        {loggedInUserData.admin && (
+          <div>
+            <label
+              htmlFor="adminCb"
+              className="p-2 gap-2 inline-flex items-center mb-2"
+            >
+              <input
+                id="adminCb"
+                type="checkbox"
+                value={'1'}
+                checked={admin}
+                onClick={(ev) => setAdmin(ev.target.checked)}
+              />
+              <span>Admin</span>
+            </label>
+          </div>
+        )}
+
         <button type="submit">Save</button>
       </form>
     </div>

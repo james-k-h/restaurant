@@ -25,13 +25,13 @@ const UsersPage = () => {
   }
 
   return (
-    <section className="mt-8 max-w-2xl mx-auto">
+    <section className="mt-8 max-w-2xl mx-auto ">
       <Tabs isAdmin={true} />
       <div className="mt-8">
         {users?.length > 0 &&
-          users.map((user) => (
+          users.map((user, i) => (
             <div
-              key={user.name}
+              key={i}
               className="bg-primary rounded-lg mb-2 p-1 px-4 items-center gap-4 flex"
             >
               <div className="grid grid-cols-2 md:grid-cols-3 gap-4 grow">
