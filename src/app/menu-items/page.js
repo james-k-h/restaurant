@@ -27,7 +27,7 @@ const MenuItemsPage = () => {
   }
 
   return (
-    <section className="mt-8 max-w-lg mx-auto">
+    <section className="mt-8 max-w-3xl mx-auto ">
       <Tabs isAdmin={true} />
       <div className="mt-8 ">
         <Link className="button flex " href="/menu-items/new">

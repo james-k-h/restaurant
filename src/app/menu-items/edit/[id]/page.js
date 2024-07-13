@@ -3,6 +3,7 @@ import Left from '@/app/components/icons/Left';
 import EditableImage from '@/app/components/layout/EditableImage';
 import MenuItemForm from '@/app/components/layout/MenuItemForm';
 import Tabs from '@/app/components/layout/header/Tabs';
+import DeleteButton from '@/app/components/ui/DeleteButton';
 import { useProfile } from '@/app/hooks/GetProfile';
 import Link from 'next/link';
 import { redirect, useParams } from 'next/navigation';
@@ -84,18 +85,21 @@ const EditMenuItemPage = () => {
     return 'Not an Administrator';
   }
   return (
-    <section className="mt-8 h-screen">
+    <section className="mt-8 ">
       <Tabs isAdmin={true} />
-      <div className="max-w-md mx-auto mt-8">
+      <div className="max-w-lg mx-auto mt-8">
         <Link href="/menu-items" className="button">
           <Left />
           <span>Show All Menu Items</span>
         </Link>
       </div>
       <MenuItemForm menuItem={menuItem} onSubmit={handleFormSubmit} />
-      <div className="max-w-md mx-auto mt-4 ">
+      <div className="max-w-md mx-auto mt-2 ">
         <div className=" max-w-xs ml-auto pl-4">
-          <button onClick={handleDeleteClick}>Delete This Menu Item</button>
+          <DeleteButton
+            label="Delete This Menu Item"
+            onDelete={handleDeleteClick}
+          ></DeleteButton>
         </div>
       </div>
     </section>

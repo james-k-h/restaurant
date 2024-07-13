@@ -22,7 +22,7 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className={roboto.className}>
-        <main className="max-w-full mx-auto border p-4 bg-tan">
+        <main className="max-w-full h-screen mx-auto border p-4 bg-tan">
           <AppProvider>
             <Toaster />
             <Header />
