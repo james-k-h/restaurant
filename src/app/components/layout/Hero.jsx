@@ -7,7 +7,7 @@ const Hero = () => {
     <>
       <section className="hero md:mt-4">
         <div className="py-8 px-12 md:py-12">
-          <h1 className="text-4xl font-semibold">
+          <h1 className="text-4xl font-semibold text-light">
             Everything <br />
             is better
             <br /> with a&nbsp;
@@ -17,7 +17,7 @@ const Hero = () => {
             Crafted with our finest recipes, passed down from generations past
           </p>
           <div className="flex gap-4 text-sm">
-            <button className="flex justify-center bg-primary uppercase items-center gap-2 text-white px-4 py-2 rounded-full">
+            <button className="flex justify-center bg-primary uppercase items-center gap-2 text-light px-4 py-2 rounded-full">
               Order now
               <Right />
             </button>

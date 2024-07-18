@@ -20,9 +20,9 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" className="scroll-smooth">
       <body className={roboto.className}>
-        <main className="max-w-full  mx-auto border p-4 bg-tan">
+        <main className="max-w-full  mx-auto border p-4 bg-black ">
           <AppProvider>
             <Toaster />
             <Header />

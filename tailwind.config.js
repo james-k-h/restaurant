@@ -9,6 +9,12 @@ module.exports = {
     extend: {
       colors: {
         // primary: '#f13a01',
+        // primary: '#F88379',
+        primary: '#DAF7A6',
+        tan: '#f5ece3',
+        // lightBlack: '#474744',
+        lightBlack: '#a9a9a9',
+
         dark: '#1b1b1b',
         accent: '#1b1b1b',
         accentDark: '#FFA500',
@@ -23,14 +29,23 @@ module.exports = {
         steelGrey: '#71797E',
         lime: '#32CD32',
         // coralPink: '#F88379',
-        primary: '#F88379',
+
         lightGreen: '#DAF7A6',
-        tan: '#f5ece3',
+
         almond: '#EFDECD',
         // lightBlack: '#343432',
-        lightBlack: '#474744',
+
         lightPink: '#FFB6C1',
         lightTan: '##FCF4D0',
+      },
+      animation: {
+        roll: 'roll 24s linear infinite',
+      },
+      screens: {
+        sxl: '1180px',
+        // @media (min-width: 1180px){...}
+        xs: '480px',
+        // @media (min-width: 480px){...}
       },
     },
   },
