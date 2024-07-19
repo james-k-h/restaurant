@@ -2,6 +2,7 @@
 import { useState } from 'react';
 import EditableImage from '../EditableImage';
 import { useProfile } from '@/app/hooks/GetProfile';
+import AddressInputs from '../AddressInputs';
 
 const UserForm = ({ user, onSave }) => {
   const [userName, setUserName] = useState(user?.name || '');
@@ -16,6 +17,13 @@ const UserForm = ({ user, onSave }) => {
 
   const { data: loggedInUserData } = useProfile();
 
+  function handleAddressChange(propName, value) {
+    if (propName === 'phone') setPhone(value);
+    if (propName === 'streetAddress') setStreetAddress(value);
+    if (propName === 'postalCode') setPostalCode(value);
+    if (propName === 'country') setCountry(value);
+    if (propName === 'city') setCity(value);
+  }
   return (
     <div className="flex gap-4  p-2 ">
       <div>
@@ -47,46 +55,15 @@ const UserForm = ({ user, onSave }) => {
         />
         <label>Email</label>
         <input type="email" value={user.email} disabled={true}></input>
-        <label>Phone Number</label>
-        <input
-          type="tel"
-          placeholder="Phone Number"
-          value={phone}
-          onChange={(ev) => setPhone(ev.target.value)}
-        />
-        <label>Country</label>
-        <input
-          type="text"
-          placeholder="Country"
-          value={country}
-          onChange={(ev) => setCountry(ev.target.value)}
-        />
-        <div className="flex gap-2 grid grid-cols-2">
-          <div>
-            <label>Postal Code</label>
-            <input
-              type="text"
-              placeholder="Postal Code"
-              value={postalCode}
-              onChange={(ev) => setPostalCode(ev.target.value)}
-            />
-          </div>
-          <div>
-            <label>City</label>
-            <input
-              type="text"
-              placeholder="City"
-              value={city}
-              onChange={(ev) => setCity(ev.target.value)}
-            />
-          </div>
-        </div>
-        <label>Street Address</label>
-        <input
-          type="text"
-          placeholder="Street Address"
-          value={streetAddress}
-          onChange={(ev) => setStreetAddress(ev.target.value)}
+        <AddressInputs
+          addressProps={{
+            streetAddress,
+            phone,
+            postalCode,
+            city,
+            country,
+          }}
+          setAddressProp={handleAddressChange}
         />
         {loggedInUserData.admin && (
           <div>

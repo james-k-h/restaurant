@@ -1,17 +1,38 @@
 'use client';
-import { useContext } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import SectionHeaders from '../components/layout/header/SectionHeaders';
 import { CartContext, cartProductPrice } from '../components/AppContext';
 import Image from 'next/image';
 import Trash from '../components/icons/Trash';
+import AddressInputs from '../components/layout/AddressInputs';
+import { useProfile } from './../hooks/GetProfile';
 
 const CartPage = () => {
   const { cartProducts, removeCartProducts } = useContext(CartContext);
+  const [address, setAddress] = useState({});
+  const { data: profileData } = useProfile();
 
+  useEffect(() => {
+    if (profileData?.city) {
+      const { phone, streetAddress, city, postalCode, country } = profileData;
+      const addressFromProfile = {
+        phone,
+        streetAddress,
+        city,
+        postalCode,
+        country,
+      };
+      setAddress(addressFromProfile);
+    }
+  }, [profileData]);
   let total = 0;
 
   for (const p of cartProducts) {
     total += cartProductPrice(p);
+  }
+
+  function handleAddressChange(propName, value) {
+    setAddress((prevAddress) => ({ ...prevAddress, [propName]: value }));
   }
 
   return (
@@ -74,7 +95,17 @@ const CartPage = () => {
             Subtotal: <span className="font-bold">${total}</span>
           </div>
         </div>
-        <div>R</div>
+        <div className="bg-lightGray p-4 rounded-lg">
+          <h2>Checkout</h2>
+          <form>
+            <label>Address</label>
+            <AddressInputs
+              addressProps={address}
+              setAddressProp={handleAddressChange}
+            />
+            <button type="submit">Pay ${total}</button>
+          </form>
+        </div>
       </div>
     </section>
   );

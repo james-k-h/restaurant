@@ -14,6 +14,7 @@ module.exports = {
         tan: '#f5ece3',
         // lightBlack: '#474744',
         lightBlack: '#a9a9a9',
+        inputBlack: '#222222',
 
         dark: '#1b1b1b',
         accent: '#1b1b1b',
