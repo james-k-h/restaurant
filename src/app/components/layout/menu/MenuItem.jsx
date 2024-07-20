@@ -24,7 +24,6 @@ const MenuItem = (menuItem) => {
     }
 
     addToCart(menuItem, selectedSize, selectedExtras);
-
     await new Promise((resolve) => setTimeout(resolve, 600));
     setShowPopup(false);
 
