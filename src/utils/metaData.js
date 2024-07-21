@@ -1,7 +1,7 @@
 const siteMetadata = {
-  title: 'House of Howard',
-  headerTitle: 'House of Howard - Finest Eats',
-  description: 'Finest Eats in the country',
+  title: 'Bayview Eatery',
+  headerTitle: 'Bayview Eatery - Served Locally',
+  description: 'Finest in Toronto',
   language: 'en-us',
   theme: 'system',
   siteUrl: 'localhost:3000',

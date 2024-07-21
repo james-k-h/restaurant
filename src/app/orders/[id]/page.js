@@ -9,7 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 const OrderPage = () => {
   const { clearCart } = useContext(CartContext);
   const [order, setOrder] = useState();
-  const [loadingOrder, setLoadingOrder] = useState(true)
+  const [loadingOrder, setLoadingOrder] = useState(true);
   const { id } = useParams();
   useEffect(() => {
     if (typeof window.console !== 'undefined') {
@@ -18,21 +18,21 @@ const OrderPage = () => {
       }
     }
     if (id) {
-      setLoadingOrder(true)
+      setLoadingOrder(true);
       fetch('/api/orders?_id=' + id).then((res) => {
         res.json().then((orderData) => {
           setOrder(orderData);
-          setLoadingOrder(false)
+          setLoadingOrder(false);
         });
       });
     }
   }, []);
 
-  let subtotal = 0
+  let subtotal = 0;
 
   if (order?.cartProducts) {
     for (const product of order?.cartProducts) {
-      subtotal += cartProductPrice(product)
+      subtotal += cartProductPrice(product);
     }
   }
 
@@ -45,37 +45,32 @@ const OrderPage = () => {
           <p>We will call you when your meal is on route.</p>
         </div>
       </div>
-      {loadingOrder && (
-        <div>
-          Loading your order
-        </div>
-      )}
+      {loadingOrder && <div>Loading your order</div>}
       {order && (
         <div className="text-primary  grid md:grid-cols-2 md:gap-16 mt-16">
           <div>
             {order.cartProducts.map((product) => (
-              <CartProduct product={product}  />
+              <CartProduct product={product} key={product._id} />
             ))}
-             <div className="text-primary flex py-2 justify-end items-center pr-2">
-            <div className="font-semibold">
-              Subtotal:
-              <br />
-              Delivery:
-              <br />
-              Total:
+            <div className="text-primary flex py-2 justify-end items-center pr-2">
+              <div className="font-semibold">
+                Subtotal:
+                <br />
+                Delivery:
+                <br />
+                Total:
+              </div>
+              <div className="font-bold pl-2 text-right">
+                ${subtotal}
+                <br />
+                $5 <br />${subtotal + 5}
+              </div>
             </div>
-            <div className="font-bold pl-2 text-right">
-              ${subtotal}<br />
-              $5 <br />${subtotal + 5}
-            </div>
-          </div>
           </div>
           <div>
             <div className="bg-lightGray p-4 rounded-lg">
-              <AddressInputs
-            addressProps={...order}
-            disabled={true}
-            /></div>
+              <AddressInputs addressProps={order} disabled={true} />
+            </div>
           </div>
         </div>
       )}

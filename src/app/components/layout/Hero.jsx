@@ -1,12 +1,19 @@
+'use client';
 import Image from 'next/image';
-import pizza_img from '../../../../public/pizza_1.jpg';
+import rest_img from '../../../../public/rest_img.jpg';
 import Right from '../icons/Right';
+import { motion } from 'framer-motion';
 
 const Hero = () => {
   return (
-    <>
-      <section className="hero md:mt-4">
-        <div className="py-8 px-12 md:py-12">
+    <section className="lg:py-16">
+      <div className="grid grid-cols-1 sm:grid-cols-12">
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="col-span-8 place-self-center text-center sm:text-left justify-self-start"
+        >
           <h1 className="text-4xl font-semibold text-light">
             Everything <br />
             is better
@@ -26,17 +33,26 @@ const Hero = () => {
               <Right />
             </button>
           </div>
-        </div>
-        <div className="relative hidden md:block">
-          <Image
-            src={pizza_img}
-            alt="pizza"
-            layout="fill"
-            objectFit="contain"
-          />
-        </div>
-      </section>
-    </>
+        </motion.div>
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.5 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.5 }}
+          className="col-span-4 place-self-center mt-4 lg:mt-0"
+        >
+          <div className="rounded-full bg-dark dark:bg-light w-[250px] h-[200px] lg:w-[400px] lg:h-[280px] relative">
+            <Image
+              src={rest_img}
+              alt="img"
+              width={500}
+              height={500}
+              className="absolute transform -translate-x-1/2 -translate-y-1/2 top-1/2 left-1/2 rounded-full"
+            />
+          </div>
+        </motion.div>
+      </div>
+    </section>
   );
 };
 export default Hero;
