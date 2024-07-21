@@ -31,13 +31,13 @@ const OrdersPage = () => {
       <div className="mt-8 mb-8 text-primary text-center">
         <SectionHeaders mainHeader="Processed Orders" />
       </div>
-      <div className="mt-8">
+      <div className="mt-8 ">
         {loadingOrders && <div>Loading all orders</div>}
         {orders?.length > 0 &&
           orders.map((order, i) => (
             <div
               key={i}
-              className="gap-4 items-center text-lightBlack font-bold bg-lightGray mb-2 p-4 rounded-lg grid grid-cols-3"
+              className=" gap-4 items-center text-lightBlack font-bold bg-lightGray mb-2 p-4 rounded-lg grid md:grid-cols-3 grid-cols-1"
             >
               <div>
                 <span
@@ -50,9 +50,12 @@ const OrdersPage = () => {
                 <div className="text-black">{order.userEmail}</div>
                 {order.cartProducts?.map((p) => p.name).join(', ')}
               </div>
-              <div className="text-right flex gap-2 justify-end text-sm">
+              <div className="text-right flex gap-2 md:justify-end justify-left text-sm">
                 {remapDateTime(order.createdAt)}
-                <Link href={'/orders/' + order._id} className="button">
+                <Link
+                  href={'/orders/' + order._id}
+                  className="button md:max-w-sm max-w-32"
+                >
                   Show Order
                 </Link>
               </div>

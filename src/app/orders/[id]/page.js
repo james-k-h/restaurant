@@ -9,6 +9,7 @@ import { useContext, useEffect, useState } from 'react';
 const OrderPage = () => {
   const { clearCart } = useContext(CartContext);
   const [order, setOrder] = useState();
+  const [loadingOrder, setLoadingOrder] = useState(true)
   const { id } = useParams();
   useEffect(() => {
     if (typeof window.console !== 'undefined') {
@@ -17,9 +18,11 @@ const OrderPage = () => {
       }
     }
     if (id) {
+      setLoadingOrder(true)
       fetch('/api/orders?_id=' + id).then((res) => {
         res.json().then((orderData) => {
           setOrder(orderData);
+          setLoadingOrder(false)
         });
       });
     }
@@ -42,8 +45,13 @@ const OrderPage = () => {
           <p>We will call you when your meal is on route.</p>
         </div>
       </div>
+      {loadingOrder && (
+        <div>
+          Loading your order
+        </div>
+      )}
       {order && (
-        <div className="text-primary grid grid-cols-2 gap-16 mt-16">
+        <div className="text-primary  grid md:grid-cols-2 md:gap-16 mt-16">
           <div>
             {order.cartProducts.map((product) => (
               <CartProduct product={product}  />

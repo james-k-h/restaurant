@@ -25,7 +25,7 @@ const UserForm = ({ user, onSave }) => {
     if (propName === 'city') setCity(value);
   }
   return (
-    <div className="flex gap-4  p-2 ">
+    <div className="md:flex gap-4  p-2 ">
       <div>
         <div className="bg-lightBlack rounded-lg p-2 relative max-w-[400px]">
           <EditableImage link={image} setLink={setImage} />
@@ -76,7 +76,7 @@ const UserForm = ({ user, onSave }) => {
                 type="checkbox"
                 value={'1'}
                 checked={admin}
-                onClick={(ev) => setAdmin(ev.target.checked)}
+                onChange={(ev) => setAdmin(ev.target.checked)}
               />
               <span>Admin</span>
             </label>
