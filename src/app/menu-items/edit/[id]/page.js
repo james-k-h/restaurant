@@ -85,7 +85,7 @@ const EditMenuItemPage = () => {
     return 'Not an Administrator';
   }
   return (
-    <section className="mt-8 ">
+    <section className="mt-8 h-screen">
       <Tabs isAdmin={true} />
       <div className="max-w-lg mx-auto mt-8">
         <Link href="/menu-items" className="button">

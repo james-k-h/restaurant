@@ -17,7 +17,7 @@ const MenuPage = () => {
   }, []);
 
   return (
-    <section className="mt-8">
+    <section className="mt-8 ">
       {categories?.length > 0 &&
         categories.map((c, i) => (
           <div key={i}>

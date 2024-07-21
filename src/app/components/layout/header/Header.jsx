@@ -59,13 +59,11 @@ const Header = () => {
           {cartProducts?.length > 0 && (
             <Link href="/cart" className="relative">
               <ShoppingCart />
-              <span
-                className="absolute
-              py-1 px-1
-              -top-3 -right-4 text-sm p-1 rounded-full leading-3"
-              >
-                ({cartProducts.length})
-              </span>
+              {cartProducts?.length > 0 && (
+                <span className="absolute py-1 px-1 -top-3 -right-4 text-sm p-1 rounded-full leading-3">
+                  ({cartProducts.length})
+                </span>
+              )}
             </Link>
           )}
         </nav>

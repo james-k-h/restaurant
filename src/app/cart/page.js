@@ -6,11 +6,21 @@ import Image from 'next/image';
 import Trash from '../components/icons/Trash';
 import AddressInputs from '../components/layout/AddressInputs';
 import { useProfile } from './../hooks/GetProfile';
+import toast from 'react-hot-toast';
+import CartProduct from '../components/layout/menu/CartProduct';
 
 const CartPage = () => {
   const { cartProducts, removeCartProducts } = useContext(CartContext);
   const [address, setAddress] = useState({});
   const { data: profileData } = useProfile();
+
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      if (window.location.href.includes('canceled=1')) {
+        toast.error('Payment cancelled');
+      }
+    }
+  }, []);
 
   useEffect(() => {
     if (profileData?.city) {
@@ -38,16 +48,38 @@ const CartPage = () => {
 
   async function proceedToCheckout(ev) {
     ev.preventDefault();
-    const response = await fetch('/api/checkout', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        address,
-        cartProducts,
-      }),
+
+    const promise = new Promise((resolve, reject) => {
+      fetch('/api/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          address,
+          cartProducts,
+        }),
+      }).then(async (response) => {
+        if (response.ok) {
+          resolve();
+          window.location = await response.json();
+        } else {
+          reject();
+        }
+      });
     });
-    const link = await response.json();
-    window.location = link;
+    toast.promise(promise, {
+      loading: 'Preparing your order...',
+      success: 'Please proceed with payment',
+      error: 'Something went wrong, please try again later.',
+    });
+  }
+
+  if (cartProducts?.length === 0) {
+    return (
+      <section className="mt-8 min-h-screen text-center">
+        <SectionHeaders mainHeader="Cart" />
+        <p className="mt-4">Your cart is empty</p>
+      </section>
+    );
   }
 
   return (
@@ -61,50 +93,13 @@ const CartPage = () => {
             <div>No products in your shopping cart</div>
           )}
           {cartProducts?.length > 0 &&
-            cartProducts.map((product, i) => (
-              <div
-                key={i}
-                className="text-light items-center flex gap-4 mb-2 border-b py-2 "
-              >
-                <div className="w-24">
-                  <Image
-                    src={product.image}
-                    alt={''}
-                    width={240}
-                    height={240}
-                  />
-                </div>
-                <div className="grow">
-                  <h3 className="font-semibold text-primary">{product.name}</h3>
-                  {product.size && (
-                    <div className="text-sm">
-                      Size: <span>{product.size.name}</span>
-                    </div>
-                  )}
-                  {product.extras?.length > 0 && (
-                    <div className="text-sm">
-                      Extras:
-                      {product.extras.map((extra, i) => (
-                        <div key={i}>
-                          {extra.name} ${extra.price}
-                        </div>
-                      ))}
-                    </div>
-                  )}
-                </div>
-                <div className="text-lg font-semibold">
-                  ${cartProductPrice(product)}
-                </div>
-                <div className="ml-2">
-                  <button
-                    type="button"
-                    onClick={() => removeCartProducts(i)}
-                    className="p-2"
-                  >
-                    <Trash />
-                  </button>
-                </div>
-              </div>
+            cartProducts.map((product, index) => (
+              <CartProduct
+                product={product}
+                onRemove={removeCartProducts}
+                key={index}
+                index={index}
+              />
             ))}
           <div className="text-primary flex py-2 justify-end items-center pr-16">
             <div className="font-semibold">

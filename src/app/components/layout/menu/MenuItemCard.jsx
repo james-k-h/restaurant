@@ -12,7 +12,7 @@ const MenuItemCard = ({ onAddToCart, ...item }) => {
         <img
           src={image}
           alt="pizza"
-          className="max-h-auto max-h-24 block mx-auto"
+          className="max-h-auto max-h-52 block mx-auto"
         />
       </div>
       <h4 className="font-semibold my-2">{name}</h4>

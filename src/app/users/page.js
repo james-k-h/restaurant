@@ -25,7 +25,7 @@ const UsersPage = () => {
   }
 
   return (
-    <section className="mt-8 max-w-2xl mx-auto h-screen">
+    <section className="mt-8 max-w-2xl mx-auto ">
       <Tabs isAdmin={true} />
       <div className="mt-8">
         {users?.length > 0 &&
