@@ -41,7 +41,7 @@ const Login = () => {
         </div>
         <button
           onClick={() => signIn('google')}
-          className="flex gap-4 justify-center bg-almond"
+          className="flex gap-4 justify-center bg-primary"
           disabled={loginPending}
         >
           <Image
