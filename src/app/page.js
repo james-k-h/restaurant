@@ -12,9 +12,17 @@ export default function Home() {
         <section className="text-center my-16 " id="about">
           <SectionHeaders subHeader="Our Story" mainHeader="About Us" />
           <div className="max-w-2xl mx-auto text-gray mt-4 flex flex-col gap-4">
-            <p>Placeholder description text</p>
-            <p>Placeholder 2 description text</p>
-            <p>Placeholder 3 description text</p>
+            <p>Served every day since 1990.</p>
+            <p>
+              Bayview Eatery opened on Thanksgiving Day 1990. Chef / Owner John
+              Doe began baking pies and selling them to restaurants and his
+              neighbors out of a small kitchen at the corner of Bayview and
+              Fleming St. in Leaside.{' '}
+            </p>
+            <p>
+              Today, Toronto’s beloved restaurant celebrates 24 years of
+              classic, made from scratch Canadian cooking.
+            </p>
           </div>
         </section>
         <section className="text-center my-8" id="contact">
@@ -23,6 +31,10 @@ export default function Home() {
             mainHeader="Contact Us"
           />
           <div className="mt-8">
+            <p className="text-gray font-semibold">57 Bayview Avenue </p>
+            <p className="text-gray font-semibold">
+              Monday - Friday, Open from 10:00 - 22:00{' '}
+            </p>
             <Link
               className="text-4xl underline text-gray hover:font-semibold"
               href={'tel:+46738123123'}

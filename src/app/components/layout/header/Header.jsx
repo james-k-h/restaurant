@@ -5,17 +5,18 @@ import { useContext, useState } from 'react';
 import { CartContext } from '../../AppContext';
 import ShoppingCart from '../../icons/ShoppingCart';
 import Bars2 from '../../icons/Bars2';
+import Logo from './Logo';
 
 function AuthLinks({ status, userName }) {
   if (status === 'authenticated') {
     return (
       <>
-        <Link href={'/profile'} className="whitespace-nowrap">
+        <Link href={'/profile'} className="whitespace-nowrap text-sm">
           Hello, {userName}
         </Link>
         <button
           onClick={() => signOut()}
-          className="bg-primary rounded-full text-white px-8 py-2"
+          className=" rounded-full text-lightGray px-8 py-2 text-sm"
         >
           Logout
         </button>
@@ -25,10 +26,12 @@ function AuthLinks({ status, userName }) {
   if (status === 'unauthenticated') {
     return (
       <>
-        <Link href={'/login'}>Login</Link>
+        <Link href={'/login'} className="text-sm">
+          Login
+        </Link>
         <Link
           href={'/register'}
-          className="bg-primary rounded-full text-white px-8 py-2"
+          className=" rounded-full text-lightGray px-8 py-2 text-sm"
         >
           Register
         </Link>
@@ -48,16 +51,16 @@ export default function Header() {
     userName = userName.split(' ')[0];
   }
   return (
-    <header>
-      <div className="flex items-center md:hidden justify-between">
-        <Link className="text-primary font-semibold text-2xl" href={'/'}>
+    <header className="p-2 px-5 sm:px-10 w-full">
+      <div className="flex items-center md:hidden justify-between ">
+        {/* <Link className="text-primary font-semibold text-2xl" href={'/'}>
           Bayview Eatery
-        </Link>
+        </Link> */}
         <div className="flex gap-8 items-center text-light">
           <Link href={'/cart'} className="relative">
             <ShoppingCart />
             {cartProducts?.length > 0 && (
-              <span className="absolute -top-2 -right-4 bg-primary text-white text-xs py-1 px-1 rounded-full leading-3">
+              <span className="absolute -top-2 -right-4 bg-black text-white text-xs py-1 px-1 rounded-full leading-3">
                 {cartProducts.length}
               </span>
             )}
@@ -73,7 +76,7 @@ export default function Header() {
       {mobileNavOpen && (
         <div
           onClick={() => setMobileNavOpen(false)}
-          className="md:hidden p-4 bg-gray rounded-lg mt-2 flex flex-col gap-2 text-center text-primary"
+          className="md:hidden p-4 bg-gray rounded-lg mt-2 flex flex-col gap-2 text-center text-lightGray text-sm"
         >
           <Link href={'/'}>Home</Link>
           <Link href={'/menu'}>Menu</Link>
@@ -83,21 +86,22 @@ export default function Header() {
         </div>
       )}
       <div className="hidden md:flex items-center justify-between">
-        <nav className="flex items-center gap-8 font-semibold text-primary">
-          <Link className="text-primary font-semibold text-2xl" href={'/'}>
+        <nav className="flex items-center gap-8 font-semibold text-lightGray text-sm">
+          {/* <Link className="text-primary font-semibold text-2xl" href={'/'}>
             Bayview Eatery
-          </Link>
+          </Link> */}
           <Link href={'/'}>Home</Link>
           <Link href={'/menu'}>Menu</Link>
           <Link href={'/#about'}>About</Link>
           <Link href={'/#contact'}>Contact</Link>
         </nav>
+        <Logo className="dark:bg-black" />
         <nav className="flex items-center gap-4 text-light font-semibold">
           <AuthLinks status={status} userName={userName} />
           <Link href={'/cart'} className="relative">
             <ShoppingCart />
             {cartProducts?.length > 0 && (
-              <span className="absolute -top-2 -right-4 bg-primary text-white text-xs py-1 px-1 rounded-full leading-3">
+              <span className="absolute -top-2 -right-4 bg-black text-lightGray text-xs py-1 px-1 rounded-full leading-3">
                 {cartProducts.length}
               </span>
             )}

@@ -3,6 +3,7 @@ import Image from 'next/image';
 import rest_img from '../../../../public/rest_img.jpg';
 import Right from '../icons/Right';
 import { motion } from 'framer-motion';
+import Link from 'next/link';
 
 const Hero = () => {
   return (
@@ -20,18 +21,24 @@ const Hero = () => {
             <br /> with a&nbsp;
             <span className="text-primary"> good meal</span>
           </h1>
-          <p className="my-6 text-gray-500 text-sm">
-            Crafted with our finest recipes, passed down from generations past
+          <p className="my-6 text-light text-sm">
+            Crafted with our finest recipes, from our family to yours
           </p>
           <div className="flex gap-4 text-sm">
-            <button className="flex justify-center bg-primary uppercase items-center gap-2 text-light px-4 py-2 rounded-full">
+            <Link
+              href="http://localhost:3000/menu"
+              className="flex justify-center bg-primary  items-center gap-2 text-light px-4 py-2 rounded-full"
+            >
               Order now
               <Right />
-            </button>
-            <button className="flex items-center border-0 gap-2 py-2 text-gray-600 font-semibold">
+            </Link>
+            <Link
+              href="/#about"
+              className="flex items-center border-0 gap-2 py-2 text-light font-semibold"
+            >
               Learn more
               <Right />
-            </button>
+            </Link>
           </div>
         </motion.div>
 

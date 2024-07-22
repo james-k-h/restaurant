@@ -65,7 +65,7 @@ const MenuItem = (menuItem) => {
         >
           <div
             onClick={(ev) => ev.stopPropagation()}
-            className="bg-white p-4 rounded-lg max-w-md max-h-screen overflow-scroll my-8"
+            className="bg-black text-light p-4 rounded-lg max-w-md max-h-screen overflow-scroll my-8"
           >
             <Image
               src={image}
@@ -77,21 +77,9 @@ const MenuItem = (menuItem) => {
             <h2 className="text-lg font-bold text-center mb-4">{name}</h2>
             <p className="text-center text-gray-500 text-sm mb-2">
               {description}
-            </p>{' '}
-            <p className="text-center text-gray-500 text-sm mb-2">
-              {description}
-            </p>{' '}
-            <p className="text-center text-gray-500 text-sm mb-2">
-              {description}
-            </p>{' '}
-            <p className="text-center text-gray-500 text-sm mb-2">
-              {description}
-            </p>{' '}
-            <p className="text-center text-gray-500 text-sm mb-2">
-              {description}
             </p>
             {sizes?.length > 0 && (
-              <div className="bg-tan rounded-md p-2">
+              <div className="bg-primary rounded-md p-2 mb-4">
                 <h3 className="text-center text-gray-500">Pick your size</h3>
                 {sizes.map((size, index) => (
                   <label
@@ -110,40 +98,37 @@ const MenuItem = (menuItem) => {
               </div>
             )}
             {extraIngredientPrices?.length > 0 && (
-              <div className="bg-tan rounded-md p-2">
-                <h3 className="text-center text-gray-500">
-                  Choose Additional Toppings
-                </h3>
-                {extraIngredientPrices.map((extraThing, index) => (
+              <div className="py-2">
+                <h3 className="text-center text-gray-700">Any extras?</h3>
+                {extraIngredientPrices.map((extraThing) => (
                   <label
-                    key={index}
-                    className="flex items-center gap-1 p-4 mb-1"
+                    key={extraThing._id}
+                    className="flex items-center gap-2 p-4 border rounded-md mb-1"
                   >
                     <input
                       type="checkbox"
-                      name={extraThing.name}
                       onChange={(ev) => handleExtraThingClick(ev, extraThing)}
                       checked={selectedExtras
                         .map((e) => e._id)
                         .includes(extraThing._id)}
+                      name={extraThing.name}
                     />
-                    <b>{extraThing.name}</b> ${extraThing.price}
+                    {extraThing.name} + ${extraThing.price}
                   </label>
                 ))}
-                <FlyingButton targetTop={'5%'} targetLeft={'95%'} src={image}>
-                  <div
-                    onClick={handleAddToCartButtonClick}
-                    className="primary sticky bottom-2"
-                  >
-                    Add to cart ${selectedPrice}
-                  </div>
-                </FlyingButton>
-
-                <button className="mt-2" onClick={() => setShowPopup(false)}>
-                  Cancel
-                </button>
               </div>
             )}
+            <FlyingButton targetTop={'5%'} targetLeft={'95%'} src={image}>
+              <div
+                className="primary sticky bottom-2"
+                onClick={handleAddToCartButtonClick}
+              >
+                Add to cart ${selectedPrice}
+              </div>
+            </FlyingButton>
+            <button className="mt-2" onClick={() => setShowPopup(false)}>
+              Cancel
+            </button>
           </div>
         </div>
       )}
