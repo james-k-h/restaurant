@@ -12,7 +12,7 @@ export default function Home() {
         <section className="text-center my-16 " id="about">
           <SectionHeaders subHeader="Our Story" mainHeader="About Us" />
           <div className="max-w-2xl mx-auto text-gray mt-4 flex flex-col gap-4">
-            <p>Served every day since 1990.</p>
+            <p>Serving the neighbourhood since 1990.</p>
             <p>
               Bayview Eatery opened on Thanksgiving Day 1990. Chef / Owner John
               Doe began baking pies and selling them to restaurants and his
