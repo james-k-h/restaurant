@@ -26,7 +26,7 @@ const Hero = () => {
           </p>
           <div className="flex gap-4 text-sm">
             <Link
-              href="http://localhost:3000/menu"
+              href="/menu"
               className="flex justify-center bg-primary  items-center gap-2 text-light px-4 py-2 rounded-full"
             >
               Order now

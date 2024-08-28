@@ -4,7 +4,7 @@ const siteMetadata = {
   description: 'Finest in Toronto',
   language: 'en-us',
   theme: 'system',
-  siteUrl: 'localhost:3000',
+  siteUrl: 'https://bayview-eatery.vercel.app/',
   siteLogo: '/logo.png',
   locale: 'en-US',
 };
